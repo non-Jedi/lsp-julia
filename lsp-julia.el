@@ -12,6 +12,16 @@
 
 ;;; Code:
 (require 'lsp-mode)
+(require 'find-func)
+
+(defconst lsp-julia--self-path
+  (file-name-directory (find-library-name "lsp-julia")))
+
+(defcustom lsp-julia-package-dir (concat lsp-julia--self-path "languageserver")
+  "The path where `LanguageServer.jl' and friends are installed,
+  set to `nil' if you want to use the globally installed versions."
+  :type 'string
+  :group 'lsp-julia)
 
 (defcustom lsp-julia-default-environment "~/.julia/environments/v1.0"
   "The path to the default environment."
@@ -23,7 +33,9 @@
   :type 'string
   :group 'lsp-julia)
 
-(defcustom lsp-julia-flags '("--startup-file=no" "--history-file=no")
+(defcustom lsp-julia-flags `(,(if lsp-julia-package-dir (concat "--project=" lsp-julia-package-dir) "")
+                             "--startup-file=no"
+                             "--history-file=no")
   "List of additional flags to call julia with."
   :type '(repeat (string :tag "argument"))
   :group 'lsp-julia)

@@ -1,0 +1,24 @@
+[submodule "languageserver/JSON"]
+	path = languageserver/JSON
+	url = https://github.com/JuliaIO/JSON.jl.git
+[submodule "languageserver/LanguageServer"]
+	path = languageserver/LanguageServer
+	url = https://github.com/julia-vscode/LanguageServer.jl.git
+[submodule "languageserver/URIParser"]
+	path = languageserver/URIParser
+	url = https://github.com/JuliaWeb/URIParser.jl.git
+[submodule "languageserver/CSTParser"]
+	path = languageserver/CSTParser
+	url = https://github.com/julia-vscode/CSTParser.jl.git
+[submodule "languageserver/Tokenize"]
+	path = languageserver/Tokenize
+	url = https://github.com/JuliaLang/Tokenize.jl.git
+[submodule "languageserver/DocumentFormat"]
+	path = languageserver/DocumentFormat
+	url = https://github.com/julia-vscode/DocumentFormat.jl
+[submodule "languageserver/StaticLint"]
+	path = languageserver/StaticLint
+	url = https://github.com/julia-vscode/StaticLint.jl
+[submodule "languageserver/SymbolServer"]
+	path = languageserver/SymbolServer
+	url = https://github.com/julia-vscode/SymbolServer.jl.git
