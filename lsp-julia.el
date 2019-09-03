@@ -18,8 +18,8 @@
   (file-name-directory (find-library-name "lsp-julia")))
 
 (defcustom lsp-julia-package-dir (concat lsp-julia--self-path "languageserver")
-  "The path where `LanguageServer.jl' and friends are installed,
-  set to `nil' if you want to use the globally installed versions."
+  "The path where `LanguageServer.jl' and friends are installed.
+Set to nil if you want to use the globally installed versions."
   :type 'string
   :group 'lsp-julia)
 
@@ -49,7 +49,7 @@
   :group 'lsp-julia)
 
 (defcustom lsp-julia-default-depot ""
-  "The default depot path, used if `JULIA_DEPOT_PATH' is unset"
+  "The default depot path, used if `JULIA_DEPOT_PATH' is unset."
   :type 'string
   :group 'lsp-julia)
 
