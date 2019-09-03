@@ -1,4 +1,4 @@
-;;; lsp-julia.el --- Julia support for lsp-mode
+;;; lsp-julia.el --- Julia support for lsp-mode   -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017 Martin Wolke, 2018 Adam Beckmeyer
 
@@ -7,12 +7,30 @@
 ;;         Guido Kraemer <gdkrmr@users.noreply.github.com>
 ;; Maintainer: Adam Beckmeyer <adam_git@thebeckmeyers.xyz>
 ;;             Guido Kraemer <gdkrmr@users.noreply.github.com>
+;; Keywords: languages, tools
 ;; Version: 0.1.0
-;; Package-Requires: (lsp-mode)
+;; Package-Requires: ((emacs "25.1") (lsp-mode "6.0"))
 ;; Keywords: languages, tools
 ;; URL: https://github.com/non-Jedi/lsp-julia
 
+
+;;; Commentary:
+
+;; lsp-mode support for Julia
+
+;; Manual installation:
+
+;; (require 'julia-mode)
+;; (push "/path/to/lsp-julia" load-path)
+;; (require 'lsp-julia)
+;; (require 'lsp-mode)
+;; ;; Configure lsp + julia
+;; (add-hook 'julia-mode-hook #'lsp-mode)
+;; (add-hook 'julia-mode-hook #'lsp)
+
+
 ;;; Code:
+
 (require 'lsp-mode)
 (require 'find-func)
 
@@ -56,15 +74,18 @@ Set to nil if you want to use the globally installed versions."
   :group 'lsp-julia)
 
 (defun lsp-julia--get-root ()
+  "Get the (Julia) project root directory of the current file."
   (let ((dir (locate-dominating-file default-directory "Project.toml")))
     (if dir (expand-file-name dir)
       (expand-file-name lsp-julia-default-environment))))
 
 (defun lsp-julia--get-depot-path ()
+  "Get the (Julia) depot path."
   (let ((dp (getenv "JULIA_DEPOT_PATH")))
     (if dp dp lsp-julia-default-depot)))
 
 (defun lsp-julia--rls-command ()
+  "The command to lauch the Julia Language Server."
   `(,lsp-julia-command
     ,@lsp-julia-flags
     ,(concat "-e using LanguageServer, Sockets, SymbolServer;"
