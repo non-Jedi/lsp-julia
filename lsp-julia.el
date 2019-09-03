@@ -4,7 +4,9 @@
 
 ;; Author: Martin Wolke <vibhavp@gmail.com>
 ;;         Adam Beckmeyer <adam_git@thebeckmeyers.xyz>
+;;         Guido Kraemer <gdkrmr@users.noreply.github.com>
 ;; Maintainer: Adam Beckmeyer <adam_git@thebeckmeyers.xyz>
+;;             Guido Kraemer <gdkrmr@users.noreply.github.com>
 ;; Version: 0.1.0
 ;; Package-Requires: (lsp-mode)
 ;; Keywords: languages, tools
