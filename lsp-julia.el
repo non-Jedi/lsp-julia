@@ -33,9 +33,12 @@
   :type 'string
   :group 'lsp-julia)
 
-(defcustom lsp-julia-flags `(,(if lsp-julia-package-dir (concat "--project=" lsp-julia-package-dir) "")
-                             "--startup-file=no"
-                             "--history-file=no")
+(defcustom lsp-julia-flags (if lsp-julia-package-dir
+                               `(,(concat "--project=" lsp-julia-package-dir)
+                                 "--startup-file=no"
+                                 "--history-file=no")
+                             '("--startup-file=no"
+                               "--history-file=no"))
   "List of additional flags to call julia with."
   :type '(repeat (string :tag "argument"))
   :group 'lsp-julia)
