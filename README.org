@@ -9,12 +9,28 @@ For information on the features =lsp-mode= provides see their [[https://github.c
 
 ** Installation
 *** Installing the Julia Language Server
+**** Included Language Server
+`lsp-julia` includes a [[https://github.com/non-Jedi/lsp-julia/issues]][working]
+Language Server using Git submodules by default.
+To initialize it, execute the following Git command in the directory of this repository:
+#+BEGIN_SRC shell
+    git submodule update --init --recursive
+#+END_SRC
 
-Open a Julia REPL and install LanguageServer.jl.
+**** Manual Installation
+Otherwise, if you'd rather install the Language Server yourself, open a Julia REPL and install LanguageServer.jl.
 
 #+BEGIN_EXAMPLE julia
     julia> Pkg.add("LanguageServer")
 #+END_EXAMPLE
+
+The included server is used by default. To use the manually installed one, you
+need to also add the following to your init.el:
+
+#+BEGIN_SRC emacs-lisp
+    (setq lsp-julia-package-dir nil)
+    ;; (require 'lsp-julia) must come after this!
+#+END_SRC
 
 Additionally because JIT compilation of LanguageServer.jl can cause a long delay
 which may cause issues with lsp-mode, I recommend using [[https://github.com/JuliaLang/PackageCompiler.jl][PackageCompiler.jl]] to
