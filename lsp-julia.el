@@ -62,7 +62,7 @@ Set to nil if you want to use the globally installed versions."
   :type 'string
   :group 'lsp-julia)
 
-(defcustom lsp-julia-default-environment "~/.julia/environments/v1.0"
+(defcustom lsp-julia-default-environment "~/.julia/environments/v1.2"
   "The path to the default environment."
   :type 'string
   :group 'lsp-julia)
