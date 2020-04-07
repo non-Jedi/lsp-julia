@@ -111,8 +111,7 @@ Set to nil if you want to use the globally installed versions."
              " server = LanguageServer.LanguageServerInstance("
              " stdin, stdout, false,"
              " \"" (lsp-julia--get-root) "\","
-             " \"" (lsp-julia--get-depot-path) "\","
-             "Dict());"
+             " \"" (lsp-julia--get-depot-path) "\");"
              " server.runlinter = true;"
              " run(server);")))
 
