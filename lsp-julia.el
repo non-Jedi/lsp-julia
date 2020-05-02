@@ -9,7 +9,7 @@
 ;;             Guido Kraemer <gdkrmr@users.noreply.github.com>
 ;; Keywords: languages, tools
 ;; Version: 0.2.0
-;; Package-Requires: ((emacs "25.1") (lsp-mode "6.0") (julia-mode "0.3"))
+;; Package-Requires: ((emacs "25.1") (lsp-mode "6.3") (julia-mode "0.3"))
 ;; Keywords: languages, tools
 ;; URL: https://github.com/non-Jedi/lsp-julia
 
