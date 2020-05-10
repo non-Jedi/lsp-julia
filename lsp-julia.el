@@ -124,7 +124,7 @@ Set to nil if you want to use the globally installed versions."
 
 (lsp-register-client
  (make-lsp-client :new-connection (lsp-stdio-connection 'lsp-julia--rls-command)
-                  :major-modes '(julia-mode)
+                  :major-modes '(julia-mode ess-julia-mode)
                   :server-id 'julia-ls))
 
 (provide 'lsp-julia)
