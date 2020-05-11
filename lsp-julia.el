@@ -110,10 +110,9 @@ Set to nil if you want to use the globally installed versions."
     ,@lsp-julia-flags
     ,(concat "-e using LanguageServer, Sockets, SymbolServer;"
              " server = LanguageServer.LanguageServerInstance("
-             " stdin, stdout, false,"
+             " stdin, stdout,"
              " \"" (lsp-julia--get-root) "\","
              " \"" (lsp-julia--get-depot-path) "\");"
-             " server.runlinter = true;"
              " run(server);")))
 
 (defconst lsp-julia--handlers
