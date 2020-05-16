@@ -93,6 +93,69 @@ Set to nil if you want to use the globally installed versions."
   :type 'string
   :group 'lsp-julia)
 
+;;; Workspace options
+(defcustom lsp-julia-format-indent 4
+  "Indent size for formatting."
+  :type 'integer
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-format-indents t
+  "Format file indents."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-format-ops t
+  "Format whitespace around operators."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-format-tuples t
+  "Format tuples."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-format-curly t
+  "Format braces."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-format-calls t
+  "Format function calls."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-format-iterops t
+  "Format loop iterators."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-format-comments t
+  "Format comments."
+  :type 'boolean
+  :group 'lsp-julia)
+(defcustom lsp-julia-format-docs t
+  "Format inline documentation."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-format-kw t
+  "Remove spaces around = in function keywords."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(lsp-register-custom-settings '(("julia.format.indent"   lsp-julia-format-indent)))
+(lsp-register-custom-settings '(("julia.format.indents"  lsp-julia-format-indents  t)))
+(lsp-register-custom-settings '(("julia.format.ops"      lsp-julia-format-ops      t)))
+(lsp-register-custom-settings '(("julia.format.tuples"   lsp-julia-format-tuples   t)))
+(lsp-register-custom-settings '(("julia.format.curly"    lsp-julia-format-curly    t)))
+(lsp-register-custom-settings '(("julia.format.calls"    lsp-julia-format-calls    t)))
+(lsp-register-custom-settings '(("julia.format.iterOps"  lsp-julia-format-iterops  t)))
+(lsp-register-custom-settings '(("julia.format.comments" lsp-julia-format-comments t)))
+(lsp-register-custom-settings '(("julia.format.docs"     lsp-julia-format-docs     t)))
+(lsp-register-custom-settings '(("julia.format.kw"       lsp-julia-format-kw       t)))
+
+
+;;; lsp-julia related functions setup
 (defun lsp-julia--get-root ()
   "Get the (Julia) project root directory of the current file."
   (let ((dir (locate-dominating-file default-directory "Project.toml")))
