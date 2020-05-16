@@ -143,6 +143,77 @@ Set to nil if you want to use the globally installed versions."
   :type 'boolean
   :group 'lsp-julia)
 
+(defcustom lsp-julia-lint-run t
+  "Run the linter on active files."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-lint-missingrefs "all"
+  "Highlight unknown symbols. The `symbols` option will not mark
+unknown fields."
+  :type 'string
+  :options '("none" "symbols" "all")
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-lint-call t
+  "This compares call signatures against all known methods for
+the called function. Calls with too many or too few arguments, or
+unknown keyword parameters are highlighted."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-lint-iter t
+  "Check iterator syntax of loops. Will identify, for example,
+attempts to iterate over single values."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-lint-constif t
+  "Check for constant conditionals in if statements that result
+in branches never being reached.."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-lint-lazy t
+  "Check for deterministic lazy boolean operators."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-lint-datadecl t
+  "Check variables used in type declarations are datatypes."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-lint-typeparam t
+  "Check parameters declared in `where` statements or datatype
+declarations are used."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-lint-modname t
+  "Check submodule names do not shadow their parent's name."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-lint-pirates t
+  "Check for type piracy - the overloading of external functions
+with methods specified for external datatypes. 'External' here
+refers to imported code."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-lint-useoffuncargs t
+  "Check that all declared arguments are used within the function
+body."
+  :type 'boolean
+  :group 'lsp-julia)
+
+(defcustom lsp-julia-lint-nothingcomp t
+  "Check for use of `==` rather than `===` when comparing against
+`nothing`."
+  :type 'boolean
+  :group 'lsp-julia)
+
 (lsp-register-custom-settings '(("julia.format.indent"   lsp-julia-format-indent)))
 (lsp-register-custom-settings '(("julia.format.indents"  lsp-julia-format-indents  t)))
 (lsp-register-custom-settings '(("julia.format.ops"      lsp-julia-format-ops      t)))
@@ -153,7 +224,18 @@ Set to nil if you want to use the globally installed versions."
 (lsp-register-custom-settings '(("julia.format.comments" lsp-julia-format-comments t)))
 (lsp-register-custom-settings '(("julia.format.docs"     lsp-julia-format-docs     t)))
 (lsp-register-custom-settings '(("julia.format.kw"       lsp-julia-format-kw       t)))
-
+(lsp-register-custom-settings '(("julia.lint.run"          lsp-julia-lint-run t)))
+(lsp-register-custom-settings '(("julia.lint.missingrefs"  lsp-julia-lint-missingrefs)))
+(lsp-register-custom-settings '(("julia.lint.call"         lsp-julia-lint-call t)))
+(lsp-register-custom-settings '(("julia.lint.iter"         lsp-julia-lint-iter t)))
+(lsp-register-custom-settings '(("julia.lint.constif"      lsp-julia-lint-constif t)))
+(lsp-register-custom-settings '(("julia.lint.lazyif"       lsp-julia-lint-lazy t)))
+(lsp-register-custom-settings '(("julia.lint.datadecl"     lsp-julia-lint-datadecl t)))
+(lsp-register-custom-settings '(("julia.lint.typeparam"    lsp-julia-lint-typeparam t)))
+(lsp-register-custom-settings '(("julia.lint.modname"      lsp-julia-lint-modname t)))
+(lsp-register-custom-settings '(("julia.lint.pirates"      lsp-julia-lint-pirates t)))
+(lsp-register-custom-settings '(("julia.lint.useoffuncargs"lsp-julia-lint-useoffuncargs t)))
+(lsp-register-custom-settings '(("julia.lint.nothingcomp"  lsp-julia-lint-nothingcomp t)))
 
 ;;; lsp-julia related functions setup
 (defun lsp-julia--get-root ()
