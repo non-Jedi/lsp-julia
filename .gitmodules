@@ -25,3 +25,6 @@
 [submodule "languageserver/FilePathsBase"]
 	path = languageserver/FilePathsBase
 	url = https://github.com/rofinn/FilePathsBase.jl.git
+[submodule "languageserver/JSONRPC"]
+	path = languageserver/JSONRPC
+	url = https://github.com/tkf/JSONRPC.jl.git
