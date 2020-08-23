@@ -254,11 +254,14 @@ body."
   "The command to lauch the Julia Language Server."
   `(,lsp-julia-command
     ,@lsp-julia-flags
-    ,(concat "-e using LanguageServer, Sockets, SymbolServer;"
+    ,(concat "-e using InteractiveUtils, Sockets, SymbolServer, LanguageServer;"
              " server = LanguageServer.LanguageServerInstance("
              " stdin, stdout,"
              " \"" (lsp-julia--get-root) "\","
-             " \"" (lsp-julia--get-depot-path) "\");"
+             " \"" (lsp-julia--get-depot-path) "\","
+             " (err, bt) -> (show(err); show(bt); rethrow(err)),"
+             " \"/home/gkraemer/.julia/symbolstorev2-lsp-julia\""
+             ");"
              " run(server);")))
 
 (defconst lsp-julia--handlers
