@@ -263,7 +263,7 @@ body."
     ;;          " \"/home/gkraemer/.julia/symbolstorev2-lsp-julia\");"
     ;;          " run(server);")
     ,(concat "-e using InteractiveUtils, Sockets, SymbolServer, LanguageServer;"
-             " server = LanguageServer.LanguageServerInstance(stdin, stdout, false, \"" (lsp-julia--get-root) "\");"
+             " server = LanguageServer.LanguageServerInstance(stdin, stdout, \"" (lsp-julia--get-root) "\");"
              " run(server);")
     ))
 
