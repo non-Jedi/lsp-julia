@@ -83,11 +83,14 @@ Set to nil if you want to use the globally installed versions."
   :type '(repeat (string :tag "argument"))
   :group 'lsp-julia)
 
-;; (defcustom lsp-symbol-server-store-path "~/.julia/symbolstorev2-lsp-julia"
-;;   "The cache directory for `SymbolServer.jl'."
-;;   :type 'directory
-;;   :initialize (lambda (sym expr) (when expr (make-directory expr t) expr))
-;;   :group 'lsp-julia)
+(defcustom lsp-julia-symbol-server-store-path "~/.julia/symbolstorev2-lsp-julia"
+  "The cache directory for `SymbolServer.jl'."
+  :type 'directory
+  ;; :initialize (lambda (sym expr)
+  ;;               (print expr)
+  ;;               (when expr (make-directory expr t) expr))
+  :group 'lsp-julia)
+
 
 (defcustom lsp-julia-timeout 30
   "Time before symbol `lsp-mode' should assume julia just ain't gonna start."
@@ -247,14 +250,24 @@ body."
 ;;; lsp-julia related functions setup
 (defun lsp-julia--get-root ()
   "Get the (Julia) project root directory of the current file."
-  (let ((dir (locate-dominating-file default-directory "Project.toml")))
-    (if dir (expand-file-name dir)
-      (expand-file-name lsp-julia-default-environment))))
+  (let* ((dir (locate-dominating-file default-directory "Project.toml"))
+         (dir2 (if dir dir lsp-julia-default-environment)))
+    (concat "\"" (expand-file-name dir2) "\"")))
 
 (defun lsp-julia--get-depot-path ()
   "Get the (Julia) depot path."
-  (let ((dp (getenv "JULIA_DEPOT_PATH")))
-    (if dp dp lsp-julia-default-depot)))
+  (let* ((dp (getenv "JULIA_DEPOT_PATH"))
+         (dp2 (if dp dp lsp-julia-default-depot)))
+    (concat "\"" dp2 "\"")))
+
+(defun lsp-julia--symbol-server-store-path-to-jl ()
+  "Convert the variable `lsp-julia-symbol-server-store-path' to a
+  string or \"nothing\" if `nil'"
+  (if lsp-julia-symbol-server-store-path
+      (let ((sssp (expand-file-name lsp-julia-symbol-server-store-path)))
+        (make-directory sssp t)
+        (concat "\"" sssp "\""))
+    "nothing"))
 
 (defun lsp-julia--rls-command ()
   "The command to lauch the Julia Language Server."
@@ -263,21 +276,11 @@ body."
     ,(concat "-e using InteractiveUtils, Sockets, SymbolServer, LanguageServer;"
              " server = LanguageServer.LanguageServerInstance("
              " stdin, stdout,"
-             " \"" (lsp-julia--get-root) "\","
-             " \"" (lsp-julia--get-depot-path) "\","
-             ;; " (err, bt) -> (show(err); show(bt); rethrow(err)),"
+             (lsp-julia--get-root) ","
+             (lsp-julia--get-depot-path) ","
              " nothing, "
-             ;; (if lsp-symbol-server-store-path
-             ;;     (concat "\"" lsp-symbol-server-store-path "\"")
-             ;;   "nothing")
-             "nothing"
-             ");"
-             " run(server);")
-    ;; ,(concat "-e using InteractiveUtils, Sockets, SymbolServer, LanguageServer;"
-    ;;          " server = LanguageServer.LanguageServerInstance(stdin, stdout, \""
-    ;;          (lsp-julia--get-root) "\");"
-    ;;          " run(server);")
-    ))
+             (lsp-julia--symbol-server-store-path-to-jl) ");"
+             " run(server);")))
 
 (defconst lsp-julia--handlers
   '(("window/setStatusBusy" .
