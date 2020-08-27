@@ -86,7 +86,7 @@ Set to nil if you want to use the globally installed versions."
 (defcustom lsp-symbol-server-store-path "~/.julia/symbolstorev2-lsp-julia"
   "The cache directory for `SymbolServer.jl'."
   :type 'directory
-  :initialize (lambda (sym expr) (when (expr) (make-directory expr) expr))
+  :initialize (lambda (sym expr) (when expr (make-directory expr) expr))
   :group 'lsp-julia)
 
 (defcustom lsp-julia-timeout 30
@@ -267,7 +267,7 @@ body."
              " \"" (lsp-julia--get-depot-path) "\","
              ;; " (err, bt) -> (show(err); show(bt); rethrow(err)),"
              " nothing, "
-             (if (lsp-symbol-server-store-path)
+             (if lsp-symbol-server-store-path
                  (concat "\"" lsp-symbol-server-store-path "\"")
                "nothing") ");"
              " run(server);")
