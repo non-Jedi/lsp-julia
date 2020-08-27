@@ -83,6 +83,12 @@ Set to nil if you want to use the globally installed versions."
   :type '(repeat (string :tag "argument"))
   :group 'lsp-julia)
 
+(defcustom lsp-symbol-server-store-path "~/.julia/symbolstorev2-lsp-julia"
+  "The cache directory for `SymbolServer.jl'."
+  :type 'directory
+  :initialize (lambda (sym expr) (when (expr) (make-directory expr) expr))
+  :group 'lsp-julia)
+
 (defcustom lsp-julia-timeout 30
   "Time before symbol `lsp-mode' should assume julia just ain't gonna start."
   :type 'number
@@ -261,7 +267,7 @@ body."
              " \"" (lsp-julia--get-depot-path) "\","
              ;; " (err, bt) -> (show(err); show(bt); rethrow(err)),"
              " nothing, "
-             " \"/home/gkraemer/.julia/symbolstorev2-lsp-julia\");"
+             "\"" (if (lsp-symbol-server-store-path) lsp-symbol-server-store-path "nothing") "\");"
              " run(server);")
     ;; ,(concat "-e using InteractiveUtils, Sockets, SymbolServer, LanguageServer;"
     ;;          " server = LanguageServer.LanguageServerInstance(stdin, stdout, \""
