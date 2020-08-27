@@ -267,7 +267,9 @@ body."
              " \"" (lsp-julia--get-depot-path) "\","
              ;; " (err, bt) -> (show(err); show(bt); rethrow(err)),"
              " nothing, "
-             "\"" (if (lsp-symbol-server-store-path) lsp-symbol-server-store-path "nothing") "\");"
+             (if (lsp-symbol-server-store-path)
+                 (concat "\"" lsp-symbol-server-store-path "\"")
+               "nothing") ");"
              " run(server);")
     ;; ,(concat "-e using InteractiveUtils, Sockets, SymbolServer, LanguageServer;"
     ;;          " server = LanguageServer.LanguageServerInstance(stdin, stdout, \""
