@@ -250,9 +250,12 @@ body."
 ;;; lsp-julia related functions setup
 (defun lsp-julia--get-root ()
   "Get the (Julia) project root directory of the current file."
-  (let* ((dir (locate-dominating-file default-directory "Project.toml"))
-         (dir2 (if dir dir lsp-julia-default-environment)))
-    (concat "\"" (expand-file-name dir2) "\"")))
+  (concat "\""
+          (expand-file-name
+           (or (locate-dominating-file default-directory "Project.toml")
+               (locate-dominating-file default-directory "JuliaProject.toml")
+               lsp-julia-default-environment))
+          "\""))
 
 (defun lsp-julia--get-depot-path ()
   "Get the (Julia) depot path."
