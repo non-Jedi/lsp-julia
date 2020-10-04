@@ -45,7 +45,7 @@ AOT compile LanguageServer.jl into your julia image. Something like:
 See the documentation on PackageCompiler.jl for further usage details.
 
 *** Installing =lsp-julia=
-
+**** quelpa
 It's currently easiest to install this package with quelpa. I'll see
 about getting this added to melpa soon enough.
 
@@ -53,6 +53,12 @@ about getting this added to melpa soon enough.
   (quelpa '(lsp-julia :fetcher github
                       :repo "non-Jedi/lsp-julia"
                       :files (:defaults "languageserver")))
+#+END_SRC
+**** use-package
+#+BEGIN_SRC emacs-lisp
+(use-package lsp-julia
+  :config
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.5"))
 #+END_SRC
 
 *** Using =lsp-julia= with a julia major mode
