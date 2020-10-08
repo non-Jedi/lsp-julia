@@ -294,4 +294,8 @@ with methods specified for external datatypes.
                   :multi-root t))
 
 (provide 'lsp-julia)
+
+;;; ISPELL Local values
+;;; LocalWords: julia linter datatypes submodule lauch boolean whitespace
+
 ;;; lsp-julia.el ends here
