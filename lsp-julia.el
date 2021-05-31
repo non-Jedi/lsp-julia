@@ -158,28 +158,27 @@ Set to nil if you want to use the globally installed versions."
   :group 'lsp-julia)
 
 (defcustom lsp-julia-lint-missingrefs "all"
-  "Highlight unknown symbols. The `symbols` option will not mark
-unknown fields."
+  "Highlight unknown symbols.
+The `symbols` option will not mark unknown fields."
   :type 'string
   :options '("none" "symbols" "all")
   :group 'lsp-julia)
 
 (defcustom lsp-julia-lint-call t
-  "This compares call signatures against all known methods for
-the called function. Calls with too many or too few arguments, or
+  "Compares call signatures against all known methods for the called function.
+Calls with too many or too few arguments, or
 unknown keyword parameters are highlighted."
   :type 'boolean
   :group 'lsp-julia)
 
 (defcustom lsp-julia-lint-iter t
-  "Check iterator syntax of loops. Will identify, for example,
-attempts to iterate over single values."
+  "Check iterator syntax of loops.
+Will identify, for example, attempts to iterate over single values."
   :type 'boolean
   :group 'lsp-julia)
 
 (defcustom lsp-julia-lint-constif t
-  "Check for constant conditionals in if statements that result
-in branches never being reached.."
+  "Check for constant conditionals in if statements that result in branches never being reached."
   :type 'boolean
   :group 'lsp-julia)
 
@@ -194,8 +193,7 @@ in branches never being reached.."
   :group 'lsp-julia)
 
 (defcustom lsp-julia-lint-typeparam t
-  "Check parameters declared in `where` statements or datatype
-declarations are used."
+  "Check parameters declared in `where` statements or datatype declarations are used."
   :type 'boolean
   :group 'lsp-julia)
 
@@ -205,21 +203,20 @@ declarations are used."
   :group 'lsp-julia)
 
 (defcustom lsp-julia-lint-pirates t
-  "Check for type piracy - the overloading of external functions
-with methods specified for external datatypes. 'External' here
-refers to imported code."
+  "Check for type piracy.
+the overloading of external functions
+with methods specified for external datatypes.
+'External' here refers to imported code."
   :type 'boolean
   :group 'lsp-julia)
 
 (defcustom lsp-julia-lint-useoffuncargs t
-  "Check that all declared arguments are used within the function
-body."
+  "Check that all declared arguments are used within the function body."
   :type 'boolean
   :group 'lsp-julia)
 
 (defcustom lsp-julia-lint-nothingcomp t
-  "Check for use of `==` rather than `===` when comparing against
-`nothing`."
+  "Check for use of `==` rather than `===` when comparing against `nothing`."
   :type 'boolean
   :group 'lsp-julia)
 
@@ -264,8 +261,7 @@ body."
     (concat "\"" dp2 "\"")))
 
 (defun lsp-julia--symbol-server-store-path-to-jl ()
-  "Convert the variable `lsp-julia-symbol-server-store-path' to a
-  string or \"nothing\" if `nil'"
+  "Convert the variable `lsp-julia-symbol-server-store-path' to a string or \"nothing\" if nil."
   (if lsp-julia-symbol-server-store-path
       (let ((sssp (expand-file-name lsp-julia-symbol-server-store-path)))
         (make-directory sssp t)
@@ -312,4 +308,8 @@ body."
                   :multi-root t))
 
 (provide 'lsp-julia)
+
+;;; ISPELL Local values
+;;; LocalWords: julia linter datatypes submodule lauch boolean whitespace
+
 ;;; lsp-julia.el ends here
